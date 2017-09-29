@@ -1,11 +1,13 @@
 package is.hi.byrjun.model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,7 +24,12 @@ public class Dive {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long diverId;
+    
+    @ManyToOne(fetch=FetchType.EAGER, optional=false)
+    @JoinColumn(name="diverId")
+    private Diver diver;
+    
+    //private Long diverId;
     private Timestamp diveDate; //  new java.sql.Timestamp( utilDate.getTime() )
     private String divingLocation;
     private int totalTime;
@@ -35,8 +42,8 @@ public class Dive {
     }
   
     // smiður
-    public Dive(Long diverId, Timestamp diveDate, String divingLocation, int totalTime, int maxDepth, int decompression, String letter) {
-        this.diverId = diverId;
+    public Dive(Diver diver, Timestamp diveDate, String divingLocation, int totalTime, int maxDepth, int decompression, String letter) {
+        this.diver = diver;
         this.diveDate = diveDate;
         this.divingLocation = divingLocation;
         this.totalTime = totalTime;
@@ -58,12 +65,12 @@ public class Dive {
         this.id = id;
     }
 
-    public Long getDiverId() {
-        return diverId;
+    public Diver getDiver() {
+        return diver;
     }
 
-    public void setDiverId(Long diverId) {
-        this.diverId = diverId;
+    public void setDiver(Diver diver) {
+        this.diver = diver;
     }
 
     public Timestamp getDiveDate() {

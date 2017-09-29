@@ -140,7 +140,7 @@ public class LoginController {
         model.addAttribute("diver", currentDiver);
         // log dive to database!
         Timestamp ts = new Timestamp(System.currentTimeMillis());
-        Dive dive = new Dive(currentDiver.getId(), ts, location, Integer.parseInt(time), Integer.parseInt(depth), Integer.parseInt(decompression), letter);
+        Dive dive = new Dive(currentDiver, ts, location, Integer.parseInt(time), Integer.parseInt(depth), Integer.parseInt(decompression), letter);
         //System.out.println(dive);
         kafariService.addDive(dive);
         return "showDiver";

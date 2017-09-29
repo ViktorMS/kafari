@@ -3,7 +3,6 @@ package is.hi.byrjun.controller;
 import is.hi.byrjun.model.Dive;
 import is.hi.byrjun.model.Diver;
 import is.hi.byrjun.services.KafariService;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  *
  * @author Einar
+ * date: september 2017
  *
  * Tekur við skipunum frá vefviðmóti til að skrá kafara og sýna upplýsingar
  */
@@ -55,6 +55,8 @@ public class LoginController {
     /**
      * Bætir kafara við gagnagrunn
      *
+     * @param diver kafari
+     * @param model síðumodel
      * @return síða með staðfestingu um að kafara hafi verið bætt við gagnagrunn
      */    
     @RequestMapping(value = "/diverAdded", method = RequestMethod.POST)
@@ -62,12 +64,16 @@ public class LoginController {
             ModelMap model) {
         model.addAttribute("diver", diver);
         kafariService.addDiver(diver);
+        currentDiver = diver;
         return "diverAdded";
     }
 
     /**
      * Tekur við nafni og lykilorði frá notanda og birtir upplýsingar um hann
      *
+     * @param name nafn 
+     * @param password lykilorð
+     * @param model síðumodel
      * @return síða sem birtir upplýsingar um notanda
      */    
     @RequestMapping(value = "/showDiver", method = RequestMethod.POST)
@@ -87,6 +93,8 @@ public class LoginController {
    /**
      * Birtir síðu með formi til að skrá dýfu
      *
+     * @param diver kafari
+     * @param model síðumodel
      * @return síða til að skrá dýfu
      */        
     @RequestMapping(value = "/diveForm", method = RequestMethod.POST)
@@ -99,6 +107,7 @@ public class LoginController {
     /**
      * Birtir síðu með öllum dýfum
      *
+     * @param model síðumodel
      * @return síða með öllum dýfum fyrir núverandi notanda
      */    
     @RequestMapping(value = "/showAllDives", method = RequestMethod.GET)
@@ -113,6 +122,12 @@ public class LoginController {
    /**
      * Skráir dýfu í gagnagrunn og birtir yfirlit yfir notanda
      *
+     * @param location staður
+     * @param time lengd dýfu
+     * @param depth hámarksdýpt dýfu
+     * @param decompression 
+     * @param letter stafur
+     * @param model síðumodel
      * @return síða með upplýsingum um notanda
      */       
     @RequestMapping(value = "/logDive", method = RequestMethod.POST)
@@ -134,6 +149,7 @@ public class LoginController {
     /**
      * Birtir síðu með öllum köfurum
      *
+     * @param model síðumodel
      * @return síða með öllum köfurum í kerfinu
      */    
     @RequestMapping(value = "/allDivers", method = RequestMethod.GET)
@@ -147,6 +163,7 @@ public class LoginController {
     /**
      * Skráir út notanda og sendir aftur á login síðu
      *
+     * @param model síðumodel
      * @return login síða
      */    
     @RequestMapping(value = "/logOut", method = RequestMethod.GET)

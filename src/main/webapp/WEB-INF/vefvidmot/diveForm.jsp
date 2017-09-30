@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-    <title>Please log in - Kafari</title>
+    <title>Enter new dive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/daginn.css"/>"/>
@@ -22,24 +22,21 @@
     </nav>
     <div class="container" style="max-width: 600px;">
         <div class="jumbotron">
-<form method="POST" commandName="dive" action="/logDive">
-    <table><tr>
-            <td>Location:</td><td> <input name="location" type="text" placeholder="Location" /> </td>
-            </tr> 
-            <tr>
-            <td>Total time (minutes):</td><td> <input name="time" type="text" 
-                                              placeholder="Time (minutes)" /> </td>
-            </tr>
-            <td>Max depth:</td><td> <input name="depth" type="text" placeholder="Max depth" /> </td>
-            </tr> 
-            <td>Decompression:</td><td> <input name="decompression" type="text" placeholder="Decompression" /> </td>
-            </tr> 
-            <td>Letter:</td><td> <input name="letter" type="text" placeholder="Letter" /> </td>
-            </tr> 
-    </table>            
-    <input type="submit" value="Add new dive"/> 
-</form>
+            <form method="POST" commandName="dive" action="/calculateDecompression">
+                <table>
+                    <tr>
+                        <td>Location:</td><td> <input name="location" type="text" placeholder="Location" /> </td>
+                    </tr>
+                    <tr>
+                        <td>Total time (minutes):</td><td> <input name="time" type="text" placeholder="Time (minutes)" /> </td>
+                    </tr>
+                    <tr>
+                        <td>Max depth:</td><td> <input name="depth" type="text" placeholder="Max depth" /> </td>
+                    </tr> 
+                </table>            
+                <input type="submit" value="Calculate and log dive"/> 
+            </form>
+        </div>
     </div>
-        
-</body>
+    </body>
 </html>

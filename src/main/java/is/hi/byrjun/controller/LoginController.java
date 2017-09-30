@@ -3,6 +3,7 @@ package is.hi.byrjun.controller;
 import is.hi.byrjun.model.Dive;
 import is.hi.byrjun.model.Diver;
 import is.hi.byrjun.services.KafariService;
+import static is.hi.byrjun.services.TableLookupSevice.lookup;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,8 +126,6 @@ public class LoginController {
      * @param location staður
      * @param time lengd dýfu
      * @param depth hámarksdýpt dýfu
-     * @param decompression 
-     * @param letter stafur
      * @param model síðumodel
      * @return síða með upplýsingum um notanda
      */       
@@ -134,16 +133,30 @@ public class LoginController {
     public String logDive(@RequestParam(value = "location", required = false) String location,
             @RequestParam(value = "time", required = false) String time,
             @RequestParam(value = "depth", required = false) String depth,
-            @RequestParam(value = "decompression", required = false) String decompression,
-            @RequestParam(value = "letter", required = false) String letter,
             ModelMap model) {
         model.addAttribute("diver", currentDiver);
+        return "showDiver";
+    }
+    
+    @RequestMapping(value = "/calculateDecompression", method = RequestMethod.POST)
+    public String calculateDecompression(@RequestParam(value = "location", required = false) String location,
+            @RequestParam(value = "time", required = false) String time,
+            @RequestParam(value = "depth", required = false) String depth,
+            ModelMap model) {
         // log dive to database!
         Timestamp ts = new Timestamp(System.currentTimeMillis());
-        Dive dive = new Dive(currentDiver, ts, location, Integer.parseInt(time), Integer.parseInt(depth), Integer.parseInt(decompression), letter);
-        //System.out.println(dive);
+        int timeInt = Integer.parseInt(time);
+        int depthInt = Integer.parseInt(depth);
+        String letter = TableLookupController.getLetter(depthInt, timeInt);
+        String decompression = TableLookupController.getDecompressionString(depthInt, timeInt);
+        Dive dive = new Dive(currentDiver, ts, location, timeInt, depthInt, decompression, letter);
         kafariService.addDive(dive);
-        return "showDiver";
+        model.addAttribute("letter", letter);
+        model.addAttribute("decompression", decompression);
+        model.addAttribute("depth", depth);
+        model.addAttribute("time", time);
+        model.addAttribute("location", location);
+        return "showDive";
     }
     
     /**

@@ -34,7 +34,7 @@ public class Dive {
     private String divingLocation;
     private int totalTime;
     private int maxDepth;
-    private int decompression;
+    private String decompression;
     private String letter;
 
     // smiður fyrir tóman hlut
@@ -42,7 +42,7 @@ public class Dive {
     }
   
     // smiður
-    public Dive(Diver diver, Timestamp diveDate, String divingLocation, int totalTime, int maxDepth, int decompression, String letter) {
+    public Dive(Diver diver, Timestamp diveDate, String divingLocation, int totalTime, int maxDepth, String decompression, String letter) {
         this.diver = diver;
         this.diveDate = diveDate;
         this.divingLocation = divingLocation;
@@ -105,11 +105,11 @@ public class Dive {
         this.maxDepth = maxDepth;
     }
 
-    public int getDecompression() {
+    public String getDecompression() {
         return decompression;
     }
 
-    public void setDecompression(int decompression) {
+    public void setDecompression(String decompression) {
         this.decompression = decompression;
     }
 

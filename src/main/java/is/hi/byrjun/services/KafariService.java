@@ -8,30 +8,30 @@ import java.util.List;
  *
  * @author Einar
  *
- * Þjónusta sem athugar hvort nafn er á réttu formi
+ * Þjónusta sem sér um samskipti við repositories
  *
  */
 public interface KafariService {
 
 
     /**
-     * Bætir við kennara í kennariRep
+     * Bætir við diver í diverRep
      *
-     * @param k Kennari
+     * @param d diver
      */
     public void addDiver(Diver d);
 
     /**
-     * Skilar öllum users í userRep
+     * Skilar öllum divers í diverRep
      *
-     * @return listi af users
+     * @return listi af divers
      */
     public List<Diver> allDivers();
     
     public Diver save(Diver diver);
     
     /**
-     * Finnur diver með nafn name pg lykilorð password
+     * Finnur diver með nafn name og lykilorð password
      * @param name
      * @param password
      * @return 
@@ -45,7 +45,7 @@ public interface KafariService {
     public void addDive(Dive dive);
     
      /**
-     * Skilar öllum dives fyrir kafara með id id
+     * Skilar öllum dives fyrir diver með id id
      *
      */   
     public List<Dive> allDives(long id);

@@ -121,23 +121,24 @@ public class LoginController {
 
     
    /**
-     * Skráir dýfu í gagnagrunn og birtir yfirlit yfir notanda
+     * Sendir notanda aftur í aðalvalmynd
      *
-     * @param location staður
-     * @param time lengd dýfu
-     * @param depth hámarksdýpt dýfu
-     * @param model síðumodel
      * @return síða með upplýsingum um notanda
      */       
     @RequestMapping(value = "/logDive", method = RequestMethod.POST)
-    public String logDive(@RequestParam(value = "location", required = false) String location,
-            @RequestParam(value = "time", required = false) String time,
-            @RequestParam(value = "depth", required = false) String depth,
-            ModelMap model) {
-        model.addAttribute("diver", currentDiver);
+    public String logDive() {
         return "showDiver";
     }
     
+    /**
+     * Skráir dýfu í gagnagrunn og birtir yfirlit yfir dýfu
+     * 
+     * @param location
+     * @param time
+     * @param depth
+     * @param model
+     * @return 
+     */
     @RequestMapping(value = "/calculateDecompression", method = RequestMethod.POST)
     public String calculateDecompression(@RequestParam(value = "location", required = false) String location,
             @RequestParam(value = "time", required = false) String time,

@@ -1,7 +1,7 @@
-package is.hi.byrjun.services;
+package is.hi.kafari.services;
 
-import is.hi.byrjun.model.Dive;
-import is.hi.byrjun.model.Diver;
+import is.hi.kafari.model.Dive;
+import is.hi.kafari.model.Diver;
 import java.util.List;
 
 /**

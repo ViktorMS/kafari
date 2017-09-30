@@ -1,6 +1,6 @@
-package is.hi.byrjun.repository;
+package is.hi.kafari.repository;
 
-import is.hi.byrjun.model.Diver;
+import is.hi.kafari.model.Diver;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

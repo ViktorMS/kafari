@@ -1,13 +1,13 @@
 
-package is.hi.byrjun.services;
+package is.hi.kafari.services;
 
-import is.hi.byrjun.model.Dive;
-import is.hi.byrjun.model.Diver;
-import is.hi.byrjun.repository.DiveRepository;
+import is.hi.kafari.model.Dive;
+import is.hi.kafari.model.Diver;
+import is.hi.kafari.repository.DiveRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import is.hi.byrjun.repository.DiverRepository;
+import is.hi.kafari.repository.DiverRepository;
 
 /**
  *

@@ -1,4 +1,4 @@
-package is.hi.byrjun.model;
+package is.hi.kafari.model;
 
 import java.util.HashSet;
 import java.util.Set;

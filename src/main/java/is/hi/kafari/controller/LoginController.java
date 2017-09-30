@@ -1,9 +1,9 @@
-package is.hi.byrjun.controller;
+package is.hi.kafari.controller;
 
-import is.hi.byrjun.model.Dive;
-import is.hi.byrjun.model.Diver;
-import is.hi.byrjun.services.KafariService;
-import static is.hi.byrjun.services.TableLookupSevice.lookup;
+import is.hi.kafari.model.Dive;
+import is.hi.kafari.model.Diver;
+import is.hi.kafari.services.KafariService;
+import static is.hi.kafari.services.TableLookupSevice.lookup;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;

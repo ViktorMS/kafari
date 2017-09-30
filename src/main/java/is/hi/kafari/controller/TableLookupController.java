@@ -1,6 +1,6 @@
-package is.hi.byrjun.controller;
+package is.hi.kafari.controller;
 
-import static is.hi.byrjun.services.TableLookupSevice.lookup;
+import static is.hi.kafari.services.TableLookupSevice.lookup;
 import java.util.ArrayList;
 
 /**

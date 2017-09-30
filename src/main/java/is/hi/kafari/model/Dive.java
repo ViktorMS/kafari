@@ -1,4 +1,4 @@
-package is.hi.byrjun.model;
+package is.hi.kafari.model;
 
 import java.sql.Timestamp;
 import javax.persistence.Entity;

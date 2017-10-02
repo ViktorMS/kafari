@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Einar
  * date: september 2017
  *
- * Tekur við skipunum frá vefviðmóti til að skrá kafara og sýna upplýsingar
+ * Tekur við skipunum frá vefviðmóti til að skrá kafa inn og út
+ * og bæta við nýjum köfurum
  */
 @Controller
 @RequestMapping("") // Notice here that the Request Mapping is set at the Class level

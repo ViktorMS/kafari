@@ -1,4 +1,3 @@
-
 package is.hi.kafari.services;
 
 import is.hi.kafari.model.Dive;
@@ -49,6 +48,8 @@ public class KafariServiceImp implements KafariService{
     
     @Override
     public void addDive(Dive dive) {
+        Diver d = dive.getDiver();
+        d.addDive(dive);
         diveRep.save(dive);
     }
     

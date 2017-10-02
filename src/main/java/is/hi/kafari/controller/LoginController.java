@@ -3,7 +3,6 @@ package is.hi.kafari.controller;
 import is.hi.kafari.model.Dive;
 import is.hi.kafari.model.Diver;
 import is.hi.kafari.services.KafariService;
-import static is.hi.kafari.services.TableLookupSevice.lookup;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,8 +112,7 @@ public class LoginController {
      */    
     @RequestMapping(value = "/showAllDives", method = RequestMethod.GET)
     public String showAllDives(Model model) {
-        ArrayList<Dive> list;
-        list = (ArrayList<Dive>) kafariService.allDives(currentDiver.getId());
+        ArrayList<Dive> list = new ArrayList(currentDiver.getDives());
         model.addAttribute("dives", list);
         return "showAllDives";
     }

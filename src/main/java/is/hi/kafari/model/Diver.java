@@ -31,11 +31,12 @@ public class Diver {
     private String name;
     private String password;
     
-    @OneToMany(mappedBy="diver", fetch=FetchType.LAZY, cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy="diver", fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval=true)
     private Set<Dive> dives= new HashSet<Dive>();
 
     // Smiður til að búa til tóman hlut. Hefur enga parametra
     public Diver() {
+        this.dives = new HashSet<Dive>();
     }
     
     public Diver (String n, String p) {
@@ -73,6 +74,10 @@ public class Diver {
 
     public void setDives(Set<Dive> dives) {
         this.dives = dives;
+    }
+    
+    public void addDive(Dive dive) {
+        dives.add(dive);
     }
     
     @Override

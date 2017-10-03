@@ -6,7 +6,7 @@
 <html lang="en">
 
 <head>
-    <title>Good day </title>
+    <title>All dives </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/daginn.css"/>"/>
@@ -56,6 +56,13 @@
 
       </div>
     </div>
+    <button onclick="printFunction()">Print</button>
+
+    <script>
+    function printFunction() {
+        window.print();
+    }
+    </script>
         
 
 

@@ -71,7 +71,13 @@ public class TableLookupSevice {
     }
     
     
-    
+    /**
+     * 
+     * @param depth Dýpt köfunar á bilinu 6-57. 
+     * @param letter Bókstafur eftir fyrri kafanir. 
+     * @return int sem bæta á við tíma köfunar. Ef dýpt er út fyrir leyfilegt 
+     * bil skilar fallið 0.
+     */
     private static int addTime(int depth, String letter){
         
         if(depth>=60)return 0;
@@ -96,7 +102,11 @@ public class TableLookupSevice {
     
     
     
-    //Les inn skrá og skilar innihaldinu sem streng. 
+    /**
+     *  Les in skrá og skilar innihaldinu sem streng. 
+     * @param filename Nafn skráar eða absolute path
+     * @return strengur með innihaldi skráarinnar. 
+     */
     private static String readFile(String filename) {
         String s="";
         

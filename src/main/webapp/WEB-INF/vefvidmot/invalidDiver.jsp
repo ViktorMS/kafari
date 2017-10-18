@@ -13,7 +13,9 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">Kafari</a>
+      <form class="form-inline my-2 my-lg-0" method="GET" action="/showDiver">
+          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Home</button>
+        </form>
     </nav>
 <div class="container" style="max-width: 600px;">
     <div class="alert alert-warning" role="alert">

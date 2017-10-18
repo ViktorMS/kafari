@@ -77,17 +77,20 @@ public class LoginController {
      * @param model síðumodel
      * @return síða sem birtir upplýsingar um notanda
      */    
-    @RequestMapping(value = "/showDiver", method = RequestMethod.POST)
+    @RequestMapping(value = "/showDiver", method = {RequestMethod.POST, RequestMethod.GET})
     public String showDiver(@RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "password", required = false) String password,
             ModelMap model) {
-        Diver d = kafariService.findDiver(name, password);
-        if (d == null) {
-            // skilar villusíðu ef kafari ekki í kerfinu
-            return "invalidDiver";
+        if (currentDiver == null) {
+            Diver d = kafariService.findDiver(name, password);
+            if (d == null) {
+                // skilar villusíðu ef kafari ekki í kerfinu
+                return "invalidDiver";
+            }
+            currentDiver = d;
         }
-        currentDiver = d;
-        model.addAttribute("diver", d);
+        
+        model.addAttribute("diver", currentDiver);
         return "showDiver";
     }
     

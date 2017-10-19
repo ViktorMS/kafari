@@ -40,7 +40,7 @@ public class DiverController {
      * @param model síðumodel
      * @return síða til að skrá dýfu
      */        
-    @RequestMapping(value = "/diveForm", method = RequestMethod.POST)
+    @RequestMapping(value = "/diveForm", method = {RequestMethod.POST, RequestMethod.GET})
     public String diveForm(@ModelAttribute("diver") Diver diver,
             ModelMap model) {
         model.addAttribute("diver", loginController.currentDiver);

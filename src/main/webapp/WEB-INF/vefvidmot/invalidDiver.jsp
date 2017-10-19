@@ -15,7 +15,7 @@
 <%@ include file="navigationLess.jsp" %>
 <div class="container" style="max-width: 600px;">
     <div class="alert alert-warning" role="alert">
-    <strong>Whoops!</strong> Username or password incorrect. Please try again.
+    <strong>Whoops!</strong> Invalid login. Please try again.
     </div>
     <form method="POST" commandName="diver" action="/showDiver">
     <div class="form-group row">

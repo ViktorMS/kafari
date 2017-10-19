@@ -13,36 +13,35 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/daginn.css"/>"/>
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-          <form class="form-inline my-2 my-lg-0" method="GET" action="/showDiver">
-          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Home</button>
-        </form>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </nav>
+<%@ include file="navigation.jsp" %>
         <div class="container" style="max-width: 600px;">
             <div class="jumbotron">
-                <form method="POST" commandName="dive" action="/logDive">
-                <table>
-                    <tr>
-                        <td>Location:</td><td> <input name="location" type="text" value="${location}" disabled="disabled" size="35"/> </td>
-                    </tr> 
-                    <tr>
-                        <td>Total time (minutes):</td><td> <input name="time" type="text" value="${time}" disabled="disabled" size="35"/> </td>
-                    </tr>
-                    <tr>
-                        <td>Max depth:</td><td> <input name="depth" type="text" value="${depth}" disabled="disabled" size="35"/> </td>
-                    </tr> 
-                    <tr>
-                        <td>Decompression:</td><td> <input name="decompression" type="text" value="${decompression}" disabled="disabled" size="35"/> </td>
-                    </tr> 
-                    <tr>
-                        <td>Letter:</td><td> <input name="letter" type="text" value="${letter}" disabled="disabled" size="35"/> </td>
-                    </tr> 
-                </table>            
-                <input type="submit" value="Return to menu"/> 
-                </form>
+                <div class="input-group input-group">
+                    <span class="input-group-addon w-50">Location</span>
+                    <input type="text" class="form-control" value="${location}" disabled="disabled">
+                </div><br>
+                <div class="input-group input-group">
+                    <span class="input-group-addon w-50">Time</span>
+                    <input type="text" class="form-control" value="${time}" disabled="disabled">
+                </div><br>
+                <div class="input-group input-group">
+                    <span class="input-group-addon w-50">Max depth</span>
+                    <input type="text" class="form-control" value="${depth}" disabled="disabled">
+                </div><br>
+                <div class="input-group input-group">
+                    <span class="input-group-addon w-50">Decompression</span>
+                    <input type="text" class="form-control" value="${decompression}" disabled="disabled">
+                </div><br>
+                <div class="input-group input-group">
+                    <span class="input-group-addon w-50">Letter</span>
+                    <input type="text" class="form-control" value="${letter}" disabled="disabled">
+                </div>
+
+                <br>
+                <a href="showDiver?">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">< Back To Menu</button>
+                </a>
+
             </div>
         </div>
     </body>

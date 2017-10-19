@@ -16,16 +16,7 @@
 <body>
 
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <form class="form-inline my-2 my-lg-0" method="GET" action="/showDiver">
-          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Home</button>
-        </form>
-      <ul class="navbar-nav mr-auto">
-      </ul>
-      <form class="form-inline my-2 my-lg-0" method="GET" action="/logOut">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Log out</button>
-      </form>
-    </nav>
+<%@ include file="navigation.jsp" %>
     
 <div class="container" style="max-width: 600px;">
     <div class="alert alert-info" role="alert">
@@ -50,6 +41,10 @@
       </div>
     </div>
   </form>
+    <br>
+    <a href="showDiver?">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">< Back To Menu</button>
+    </a>
 </div>
 
 </form>

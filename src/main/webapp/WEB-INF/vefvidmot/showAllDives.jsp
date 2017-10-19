@@ -12,19 +12,11 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/daginn.css"/>"/>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <form class="form-inline my-2 my-lg-0" method="GET" action="/showDiver">
-          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Home</button>
-        </form>
-      <ul class="navbar-nav mr-auto">
-      </ul>
-      <form class="form-inline my-2 my-lg-0" method="GET" action="/logOut">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Log out</button>
-      </form>
-    </nav>
+    <%@ include file="navigation.jsp" %>
+
         <div class="container">
       <div class="jumbotron">
-          <h1>All dives</h1>
+          <h1>All dives</h1><br>
         <c:choose>
         <c:when test="${not empty dives}">
             <table class="dives table table-striped table-bordered table-hover table-responsive">
@@ -55,10 +47,14 @@
         </c:otherwise>
     </c:choose>
 
-
+            <br>
+            <a href="showDiver?">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">< Back To Menu</button>
+            </a>
       </div>
+      <button class="btn btn-primary my-2 my-sm-0" onclick="printFunction()"><span class="glyphicon glyphicon-print"></span> Print</button>
     </div>
-    <button class="btn btn-outline-danger my-2 my-sm-0"; onclick="printFunction()">Print</button>
+    
 
     <script>
     function printFunction() {

@@ -12,16 +12,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/daginn.css"/>"/>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <form class="form-inline my-2 my-lg-0" method="GET" action="/showDiver">
-          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Home</button>
-        </form>
-      <ul class="navbar-nav mr-auto">
-      </ul>
-      <form class="form-inline my-2 my-lg-0" method="GET" action="/logOut">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Log out</button>
-      </form>
-    </nav>
+<%@ include file="navigation.jsp" %>
       <div class="container">
                   <div class="alert alert-success" role="alert">
             ${diver.getName()} has been added to database

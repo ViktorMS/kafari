@@ -14,31 +14,26 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/css/daginn.css"/>"/>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <form class="form-inline my-2 my-lg-0" method="GET" action="/showDiver">
-          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Home</button>
-        </form>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </nav>
-    <div class="container" style="max-width: 600px;">
+<%@ include file="navigation.jsp" %>
+    <div class="container" style="max-width:600px;">
         <div class="jumbotron">
+            <h1>Log new dive</h1>
+            <br>
             <form method="POST" commandName="dive" action="/calculateDecompression">
-                <table>
-                    <tr>
-                        <td>Location:</td><td> <input name="location" type="text" placeholder="Location" /> </td>
-                    </tr>
-                    <tr>
-                        <td>Total time (minutes):</td><td> <input name="time" type="text" placeholder="Time (minutes)" /> </td>
-                    </tr>
-                    <tr>
-                        <td>Max depth:</td><td> <input name="depth" type="text" placeholder="Max depth" /> </td>
-                    </tr> 
-                </table>            
-                <input type="submit" value="Calculate and log dive"/> 
+                <input name="location" type="text" placeholder="Location of dive" required class="form-control">
+                <br>
+                <input name="time" type="text" placeholder="Time in minutes" required class="form-control">
+                <br>
+                <input name="depth" type="text" placeholder="Max depth in meters" required class="form-control">
+                <br>
+                <input type="submit" value="Calculate and log dive" class="btn btn-primary" style="width:100%;"> 
+                <br>
             </form>
+                <br>
+                <a href="showDiver?">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">< Back To Menu</button>
+                </a>
         </div>
     </div>
-    </body>
+</body>
 </html>

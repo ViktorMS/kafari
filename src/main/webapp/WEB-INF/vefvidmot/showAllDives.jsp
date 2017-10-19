@@ -48,9 +48,7 @@
     </c:choose>
 
             <br>
-            <a href="showDiver?">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">< Back To Menu</button>
-            </a>
+            <%@ include file="navigationBackBtn.jsp" %>
       </div>
       <button class="btn btn-primary my-2 my-sm-0" onclick="printFunction()"><span class="glyphicon glyphicon-print"></span> Print</button>
     </div>

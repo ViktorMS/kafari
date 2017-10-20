@@ -1,6 +1,7 @@
 package is.hi.kafari.controller;
 
 import is.hi.kafari.model.Diver;
+import is.hi.kafari.model.Message;
 import is.hi.kafari.services.KafariService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,8 @@ public class LoginController {
     
     // geymir innskráðan diver
     Diver currentDiver = null;
+    Message currentMessage = new Message();
+    
     
     /**
      * Birtir login síðu
@@ -40,6 +43,7 @@ public class LoginController {
      */
     @RequestMapping("")
     public String logIn(ModelMap model) {
+        currentMessage.setMessage("");
         // check if user is logged in, then show dashboard
         if(currentDiver != null) 
         {
@@ -47,6 +51,8 @@ public class LoginController {
             return "showDiver";
         }
         // else, show the login menu
+        currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>Hello there!</strong> Please log in with your username and password. </div>");
+        model.addAttribute("message", currentMessage);
         return "login";
     }
     
@@ -72,8 +78,13 @@ public class LoginController {
             ModelMap model) {
         model.addAttribute("diver", diver);
         kafariService.addDiver(diver);
-        currentDiver = diver;
-        return "diverAdded";
+        
+        String diverAddedMessage = "<div class=\"alert alert-success\" role=\"alert\"> "+diver.getName()+" has been added to database </div>";
+        
+        currentMessage.setMessage(diverAddedMessage);
+        model.addAttribute("message", currentMessage);
+        
+        return "showDiver";
     }
 
     /**
@@ -84,8 +95,28 @@ public class LoginController {
      * @param model síðumodel
      * @return síða sem birtir upplýsingar um notanda
      */    
-    @RequestMapping(value = "/showDiver", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/", method = {RequestMethod.GET})
     public String showDiver
+        (
+            ModelMap model
+        )    
+    {
+        
+        if (currentDiver == null) {
+                // skilar login síðu ef kafari ekki í kerfinu
+                currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>Hello there!</strong> Please log in with your username and password. </div>");
+                model.addAttribute("message", currentMessage);
+            
+                return "login";
+        }
+        currentMessage.setMessage("");
+        model.addAttribute("message", currentMessage);
+        
+        model.addAttribute("diver", currentDiver);
+        return "showDiver";
+    }
+    @RequestMapping(value = "/", method = {RequestMethod.POST})
+    public String showDiverLogin
         (
             @RequestParam(value = "name", required = false) 
             String name,
@@ -94,19 +125,25 @@ public class LoginController {
             ModelMap model
         )    
     {
+        
         if (currentDiver == null) {
+            
             Diver d = kafariService.findDiver(name, password);
             if (d == null) {
-                // skilar villusíðu ef kafari ekki í kerfinu
-                return "invalidDiver";
+                // skilar login síðu ef kafari ekki í kerfinu
+                currentMessage.setMessage("<div class=\"alert alert-warning\" role=\"alert\"> <strong>Whoops!</strong> Username or password incorrect. </div>");
+                model.addAttribute("message", currentMessage);
+            
+                return "login";
             }
             currentDiver = d;
         }
+        currentMessage.setMessage("");
+        model.addAttribute("message", currentMessage);
         
         model.addAttribute("diver", currentDiver);
         return "showDiver";
-    }
-    
+    }    
     /**
      * Skráir út notanda og sendir aftur á login síðu
      *
@@ -116,6 +153,8 @@ public class LoginController {
     @RequestMapping(value = "/logOut", method = RequestMethod.GET)
     public String logOut(Model model) {
         currentDiver = null;
+        currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>All done!</strong> You have been logged out. </div>");
+        model.addAttribute("message", currentMessage);
         return "login";
     }
 }

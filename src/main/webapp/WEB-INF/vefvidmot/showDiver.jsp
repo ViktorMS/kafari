@@ -13,8 +13,10 @@
 </head>
 <body>
 <%@ include file="navigation.jsp" %>
-        <div class="container">
+    <div class="container">
+      ${message.getMessage()}
       <div class="jumbotron">
+
         <h1>Hello ${diver.getName()}</h1>
         <p class="lead">Welcome to your dashboard. Here you can log new dives and view your current dives.</p>
         <form method="POST" commandName="diver" action="/diveForm">

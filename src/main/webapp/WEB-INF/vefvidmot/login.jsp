@@ -17,10 +17,10 @@
 <%@ include file="navigationLess.jsp" %>
     
 <div class="container" style="max-width: 600px;">
-    <div class="alert alert-info" role="alert">
-    <strong>Hello there!</strong> Please log in with your username and password.
-    </div>
-    <form method="POST" commandName="diver" action="/showDiver">
+    
+    ${message.getMessage()}
+
+    <form method="POST" commandName="diver" action="/">
     <div class="form-group row">
       <label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>
       <div class="col-sm-10">

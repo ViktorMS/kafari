@@ -39,7 +39,14 @@ public class LoginController {
      * @return login síða
      */
     @RequestMapping("")
-    public String logIn() {
+    public String logIn(ModelMap model) {
+        // check if user is logged in, then show dashboard
+        if(currentDiver != null) 
+        {
+            model.addAttribute("diver", currentDiver);
+            return "showDiver";
+        }
+        // else, show the login menu
         return "login";
     }
     
@@ -78,9 +85,15 @@ public class LoginController {
      * @return síða sem birtir upplýsingar um notanda
      */    
     @RequestMapping(value = "/showDiver", method = {RequestMethod.POST, RequestMethod.GET})
-    public String showDiver(@RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "password", required = false) String password,
-            ModelMap model) {
+    public String showDiver
+        (
+            @RequestParam(value = "name", required = false) 
+            String name,
+            @RequestParam(value = "password", required = false) 
+            String password,
+            ModelMap model
+        )    
+    {
         if (currentDiver == null) {
             Diver d = kafariService.findDiver(name, password);
             if (d == null) {

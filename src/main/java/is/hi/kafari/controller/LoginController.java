@@ -3,10 +3,12 @@ package is.hi.kafari.controller;
 import is.hi.kafari.model.Diver;
 import is.hi.kafari.model.Message;
 import is.hi.kafari.services.KafariService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,12 +72,19 @@ public class LoginController {
      * Bætir kafara við gagnagrunn
      *
      * @param diver kafari
+     * @param villur ef einhverjar villur hafa orðið í forminu 
      * @param model síðumodel
      * @return síða með staðfestingu um að kafara hafi verið bætt við gagnagrunn
      */    
     @RequestMapping(value = "/diverAdded", method = RequestMethod.POST)
-    public String diverAdded(@ModelAttribute("diver") Diver diver,
+    public String diverAdded(@Valid @ModelAttribute("diver") Diver diver,
+            BindingResult villur,
             ModelMap model) {
+        if (villur.hasErrors()) {
+            currentMessage.setMessage("<div class=\"alert alert-success\" role=\"alert\">"+villur.getFieldError().getDefaultMessage() +"</div>");
+            model.addAttribute("message", currentMessage);
+            return "addDiver";
+        }
         model.addAttribute("diver", diver);
         kafariService.addDiver(diver);
         kafariService.setCurrentDiver(diver);

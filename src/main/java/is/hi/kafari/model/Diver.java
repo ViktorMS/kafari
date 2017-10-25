@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.*;
 
 
 /**
@@ -28,7 +29,13 @@ public class Diver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @NotNull(message = "Please enter a valid user name")
+    @Size(min=1, max=100, message = "Please enter a valid user name")
     private String name;
+    
+    @NotNull(message = "Please enter password")
+    @Size(min=1, max=100, message = "Please enter password")
     private String password;
     
     @OneToMany(mappedBy="diver", fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval=true)

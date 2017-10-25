@@ -1,14 +1,17 @@
 package is.hi.kafari.controller;
 
 import is.hi.kafari.model.Dive;
+import is.hi.kafari.model.DiveForm;
 import is.hi.kafari.model.Diver;
 import is.hi.kafari.services.KafariService;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -88,21 +91,26 @@ public class DiverController {
     /**
      * Skráir dýfu í gagnagrunn og birtir yfirlit yfir dýfu
      * 
-     * @param location
-     * @param time
-     * @param depth
-     * @param model
-     * @return 
+     * @param diveForm inniheldur parametra fyrir dýfuna
+     * @param villur villur ef parametrar eru ólöglegir
+     * @param model síðumodel
+     * @return síða með nánari upplýsingum um dýfuna eða dýfusíða aftur með
+     *         villuskilaboðum ef parametrar eru ólöglegir
      */
     @RequestMapping(value = "/calculateDecompression", method = RequestMethod.POST)
-    public String calculateDecompression(@RequestParam(value = "location", required = false) String location,
-            @RequestParam(value = "time", required = false) String time,
-            @RequestParam(value = "depth", required = false) String depth,
+    public String calculateDecompression(@Valid @ModelAttribute("diveForm") DiveForm diveForm, 
+            BindingResult villur,
             ModelMap model) {
-        // log dive to database!
+        if (villur.hasErrors()) {
+            loginController.currentMessage.setMessage("<div class=\"alert alert-success\" role=\"alert\">"+villur.getFieldError().getDefaultMessage() +"</div>");
+            model.addAttribute("message", loginController.currentMessage);
+            return "diveForm";
+        }
+         // log dive to database!
         Timestamp ts = new Timestamp(System.currentTimeMillis());
-        int timeInt = Integer.parseInt(time);
-        int depthInt = Integer.parseInt(depth);
+        String location = diveForm.getDivingLocation();
+        int timeInt = diveForm.getTotalTime();
+        int depthInt = diveForm.getMaxDepth();
         String letter = TableLookupController.getLetter(depthInt, timeInt);
         String decompression = TableLookupController.getDecompressionString(depthInt, timeInt);
         Diver d = kafariService.getCurrentDiver();
@@ -110,8 +118,8 @@ public class DiverController {
         kafariService.addDive(dive);
         model.addAttribute("letter", letter);
         model.addAttribute("decompression", decompression);
-        model.addAttribute("depth", depth);
-        model.addAttribute("time", time);
+        model.addAttribute("depth", depthInt);
+        model.addAttribute("time", timeInt);
         model.addAttribute("location", location);
         return "showDive";
     }

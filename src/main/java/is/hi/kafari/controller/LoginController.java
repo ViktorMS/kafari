@@ -75,6 +75,8 @@ public class LoginController {
      * @param villur ef einhverjar villur hafa orðið í forminu 
      * @param model síðumodel
      * @return síða með staðfestingu um að kafara hafi verið bætt við gagnagrunn
+     *         eða addDiver síðu aftur með villuskilaboðum ef parametrar voru
+     *         ólöglegir
      */    
     @RequestMapping(value = "/diverAdded", method = RequestMethod.POST)
     public String diverAdded(@Valid @ModelAttribute("diver") Diver diver,

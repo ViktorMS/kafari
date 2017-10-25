@@ -101,7 +101,7 @@ public class OTUService {
     
     
     
-    public static void main(String args[]){
+    /*public static void main(String args[]){
         int depth = 30;
         double oxygenPercentage = 0.21;
         ArrayList<Dive> test = new ArrayList();
@@ -113,11 +113,11 @@ public class OTUService {
         }
         double pO2 = (depth /10.0)+1 * oxygenPercentage;
         
-        
+   
         
         
 
         
-    }
+    }*/
     
 }

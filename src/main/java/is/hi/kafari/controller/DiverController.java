@@ -43,7 +43,14 @@ public class DiverController {
     @RequestMapping(value = "/diveForm", method = {RequestMethod.POST, RequestMethod.GET})
     public String diveForm(@ModelAttribute("diver") Diver diver,
             ModelMap model) {
-        model.addAttribute("diver", loginController.currentDiver);
+        Diver d = kafariService.getCurrentDiver();
+        if (d == null) {
+            // sendir notanda aftur á login síðu ef ekki innskráður
+            loginController.currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>Access restricted!</strong> Please log in with your username and password. </div>");
+            model.addAttribute("message", loginController.currentMessage);
+            return "login";
+        }
+        model.addAttribute("diver", d);
         return "diveForm";
     }
     
@@ -55,7 +62,14 @@ public class DiverController {
      */    
     @RequestMapping(value = "/showAllDives", method = RequestMethod.GET)
     public String showAllDives(Model model) {
-        ArrayList<Dive> list = new ArrayList(loginController.currentDiver.getDives());
+        Diver d = kafariService.getCurrentDiver();
+        if (d == null) {
+            // sendir notanda aftur á login síðu ef ekki innskráður
+            loginController.currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>Access restricted!</strong> Please log in with your username and password. </div>");
+            model.addAttribute("message", loginController.currentMessage);
+            return "login";
+        }
+        ArrayList<Dive> list = new ArrayList(d.getDives());
         model.addAttribute("dives", list);
         return "showAllDives";
     }
@@ -91,7 +105,8 @@ public class DiverController {
         int depthInt = Integer.parseInt(depth);
         String letter = TableLookupController.getLetter(depthInt, timeInt);
         String decompression = TableLookupController.getDecompressionString(depthInt, timeInt);
-        Dive dive = new Dive(loginController.currentDiver, ts, location, timeInt, depthInt, decompression, letter);
+        Diver d = kafariService.getCurrentDiver();
+        Dive dive = new Dive(d, ts, location, timeInt, depthInt, decompression, letter);
         kafariService.addDive(dive);
         model.addAttribute("letter", letter);
         model.addAttribute("decompression", decompression);

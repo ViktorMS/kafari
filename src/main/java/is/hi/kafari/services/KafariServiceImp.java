@@ -20,8 +20,20 @@ public class KafariServiceImp implements KafariService{
     DiverRepository diverRep;
     @Autowired
     DiveRepository diveRep;
-  
+    
+    // núverandi innsrkáður diver
+    private Diver currentDiver = null;
 
+    @Override
+    public Diver getCurrentDiver() {
+        return currentDiver;
+    }
+
+    @Override
+    public void setCurrentDiver(Diver diver) {
+        this.currentDiver = diver;
+    }
+ 
     @Override
     public void addDiver(Diver d) {
          diverRep.save(d);    // Notum save en ekki add

@@ -49,4 +49,16 @@ public interface KafariService {
      *
      */   
     public List<Dive> allDives(long id);
+
+    /**
+     * Skilar núverandi innskráðum diver
+     * @return currentdiver
+     */
+    public Diver getCurrentDiver();
+    
+    /**
+     * Setur viðfangið diver sem currentdiver
+     * @param diver nýr diver sem var að skrá sig inn
+     */
+    public void setCurrentDiver(Diver diver);
 }

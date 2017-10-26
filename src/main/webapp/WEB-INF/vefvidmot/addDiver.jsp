@@ -19,6 +19,7 @@
 <%@ include file="navigation.jsp" %>
     
 <div class="container" style="max-width: 600px;">
+    ${message.getMessage()}
     <div class="alert alert-info" role="alert">
     <strong>Create a new user.</strong> Please fill out the form and confirm.
     </div>

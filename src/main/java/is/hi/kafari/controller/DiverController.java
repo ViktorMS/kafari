@@ -102,7 +102,7 @@ public class DiverController {
             BindingResult villur,
             ModelMap model) {
         if (villur.hasErrors()) {
-            loginController.currentMessage.setMessage("<div class=\"alert alert-success\" role=\"alert\">"+villur.getFieldError().getDefaultMessage() +"</div>");
+            loginController.currentMessage.setMessage("<div class=\"alert alert-danger\" role=\"alert\">"+villur.getFieldError().getDefaultMessage() +"</div>");
             model.addAttribute("message", loginController.currentMessage);
             return "diveForm";
         }
@@ -113,6 +113,12 @@ public class DiverController {
         int depthInt = diveForm.getMaxDepth();
         String letter = TableLookupController.getLetter(depthInt, timeInt);
         String decompression = TableLookupController.getDecompressionString(depthInt, timeInt);
+        if(decompression==null){
+            loginController.currentMessage.setMessage("<div class=\"alert alert-danger\" role=\"alert\"> Dive outside of tables. </div>");
+            model.addAttribute("message", loginController.currentMessage);
+            return "diveForm";
+        }
+        
         Diver d = kafariService.getCurrentDiver();
         Dive dive = new Dive(d, ts, location, timeInt, depthInt, decompression, letter);
         kafariService.addDive(dive);

@@ -18,12 +18,12 @@ public class DiveForm {
     
     @NotNull(message = "Please enter total time of dive")
     @Min(value=0, message = "Did you travel back in time during the dive? Please enter a positive value.")
-    @Max(value=460, message = "Dangerously long dive! Please shorten your dive.")
+    @Max(value=1440, message = "Dangerously long dive! Please shorten your dive.")
     private int totalTime;
     
     @NotNull(message = "Please enter maximum depth during dive")
     @Min(value=0, message = "How did you take a dive above water? Please enter a positive value.")
-    @Max(value=460, message = "Dangerously deep dive! Please shorten your dive.")
+    @Max(value=60, message = "Dangerously deep dive! Dives under 50 meters are not allowed. Dives under 60 meters are outside the dive tables.")
     private int maxDepth;
 
     // smiður fyrir tóman hlut

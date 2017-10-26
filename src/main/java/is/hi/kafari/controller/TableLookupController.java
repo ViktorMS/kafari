@@ -18,7 +18,7 @@ public class TableLookupController {
      */
     public static String getLetter(int depth, int time) {
         ArrayList<String> tableRow = lookup(depth, time, null);
-        if (tableRow == null) throw new IllegalArgumentException("invalid depth and/or time parameters!");
+        if (tableRow == null) return null;
         String letter = tableRow.get(0); // read letter from list
         return letter;
     }
@@ -31,7 +31,7 @@ public class TableLookupController {
      */
     public static String getDecompressionString(int depth, int time) {
         ArrayList<String> tableRow = lookup(depth, time, null);
-        if (tableRow == null) throw new IllegalArgumentException("invalid depth and/or time parameters!");
+        if (tableRow == null) return null;
         String[] depths = new String[]{"", "3m", "6m", "12m", "15m"};
         String decompression = "";
         for(int i = 1; i < tableRow.size(); i++) {

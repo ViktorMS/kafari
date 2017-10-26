@@ -5,3 +5,13 @@ body {
 input{
   min-width: 200px;
 }
+
+.sign-in-buttons{
+    padding:20px;
+    display:flex;
+    flex-flow: row nowrap;
+}
+
+.sign-in-buttons>button{
+    margin:10px;
+}

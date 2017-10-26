@@ -34,8 +34,12 @@
       </div>
     </div>
     <div class="form-group row">
-      <div class="offset-sm-2 col-sm-10">
+      <div class="offset-sm-2 row-sm-10 sign-in-buttons">
         <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+    <form method="GET" commandName="diver" action="/addDiver">
+        <button type="submit" class="btn btn-success">Register</button>  
+    </form>
       </div>
     </div>
   </form>

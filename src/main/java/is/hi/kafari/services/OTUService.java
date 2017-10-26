@@ -11,7 +11,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
- *  Klasinn gefur OTU einingar í 
+ *  Klasinn heldur utan um reikning á OTU einingum við köfun. Hann hefur aðferðir
+ * til að reikna út heildar OTU í einni köfun eða heildar OTU í köfunum í einum 
+ * ArrayList. Hann geymir einnig fasta um ráðlögð viðmið og hættumörk þegar það
+ * kemur að því að innbyrða súrefni. 
  * @author Símon Örn Reynisson <sor7@hi.is>
  */
 public class OTUService {
@@ -63,6 +66,14 @@ public class OTUService {
         return Integer.toString(sum) + " OTU";
     }
     
+    /**
+     * Tekur inn dýpt, köfun, og lengd köfunar ásamt súrefnisprósentu í öndunarlofti,
+     * og skilar magni súrefnis sem andað er í OTU mælieingunni. 
+     * @param depth
+     * @param diveTime
+     * @param oxygenPercentage
+     * @return double: Magn OTU eftir köfun. 
+     */
     private double getOTU(int depth, int diveTime, double oxygenPercentage){
         
         double pO2 = (depth /10.0)+1* oxygenPercentage;
@@ -98,18 +109,16 @@ public class OTUService {
     
     
     
-    
-    
-    
+
     /*public static void main(String args[]){
         int depth = 30;
         double oxygenPercentage = 0.21;
         ArrayList<Dive> test = new ArrayList();
         Diver Joe = new Diver ( "Joe", "1234");
         Timestamp time = new Timestamp(5000);
-        for(int i = 0; i < 10 ; i++) {
+        for(int i = 1; i < 10 ; i++) {
             //(Diver diver, Timestamp diveDate, String divingLocation, int totalTime, int maxDepth, String decompression, String letter)
-            //test.add(new Dive(Joe, ))
+            test.add(new Dive(Joe,time,"Inside",i*10,i*5,"void","A"));
         }
         double pO2 = (depth /10.0)+1 * oxygenPercentage;
         

@@ -37,6 +37,7 @@
       <div class="offset-sm-2 row-sm-10 sign-in-buttons">
         <button type="submit" class="btn btn-primary">Sign in</button>
     </form>
+    <br>
     <form method="GET" commandName="diver" action="/addDiver">
         <button type="submit" class="btn btn-success">Register</button>  
     </form>

@@ -14,12 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 /**
  *
- * @author Viktor Jon Helgason
- * @date október 2017 
- * HBV501G Hugbúnaðarverkefni 1 Háskóli Íslands
- * 
- * Prófunarklasi sem athugar hvort controller keyrir 
-*/
+ * @author viktor jon helgason
+ */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -36,7 +32,7 @@ public class SmokeTest {
 	public void contextLoads() {
         
                    assertThat(loginController).isNotNull();
-	}
+}
 
 }
 

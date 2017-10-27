@@ -17,8 +17,9 @@ public class TableLookupSevice {
      * @param diveTime ---- tími köfunar.
      * @param letter   --- Bókstafur sem bætir x tima við köfun skv. töflum. 
      * @return ArrayList af strengjum á eftirfarandi formi: {Bókstafur, Decompression 3m, decompression 6m, 12m, 15m}
+     * @throws org.json.JSONException
      */
-    public static ArrayList<String> lookup(int depth, int diveTime, String letter){
+    public static ArrayList<String> lookup(int depth, int diveTime, String letter) throws JSONException{
         ArrayList<String> results = new ArrayList();
         String data = readFile("toflur.json");
         JSONObject jobj = new JSONObject(data);
@@ -78,7 +79,7 @@ public class TableLookupSevice {
      * @return int sem bæta á við tíma köfunar. Ef dýpt er út fyrir leyfilegt 
      * bil skilar fallið 0.
      */
-    private static int addTime(int depth, String letter){
+    private static int addTime(int depth, String letter) throws JSONException{
         
         if(depth>=60)return 0;
         String data = readFile("addtime.json");
@@ -134,7 +135,7 @@ public class TableLookupSevice {
      * mörg önnur JSONArray sem eru á forminu [int maxTime, int deco, char letter].
      * Skilar @code(null) ef dýptin er út fyrir töfluna.
      */
-    private static JSONArray getTable(JSONObject o, int depth){
+    private static JSONArray getTable(JSONObject o, int depth) throws JSONException{
         
         int i = 0;
         JSONObject j = o.getJSONObject("tables").getJSONObject(Integer.toString(i));

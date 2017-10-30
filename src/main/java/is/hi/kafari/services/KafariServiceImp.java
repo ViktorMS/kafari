@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import is.hi.kafari.repository.DiverRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -23,6 +25,14 @@ public class KafariServiceImp implements KafariService{
     DiverRepository diverRep;
     @Autowired
     DiveRepository diveRep;
+    
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
     
     // núverandi innsrkáður diver
     private Diver currentDiver = null;
@@ -61,7 +71,10 @@ public class KafariServiceImp implements KafariService{
      */
     @Override
     public void addDiver(Diver d) {
-         diverRep.save(d);    // Notum save en ekki add
+        String hashedPassword = passwordEncoder.encode(d.getPassword());
+        //System.out.println(hashedPassword);
+        d.setPassword(hashedPassword);
+        diverRep.save(d);    // Notum save en ekki add
     }
 
     /**
@@ -88,15 +101,20 @@ public class KafariServiceImp implements KafariService{
      * Finnur diver með nafn name og lykilorð password
      * @param name
      * @param password
-     * @return 
+     * @return diver with matching name and password if exists, else null
      */
     @Override
     public Diver findDiver(String name, String password) {
-        List<Diver> divers = diverRep.findByNameAndPassword(name, password);
+        List<Diver> divers = diverRep.findByName(name);
         if (divers.isEmpty()) {
             return null;
         }
-        return divers.get(0);
+        for (Diver d: divers) {
+            if (passwordEncoder.matches(password, d.getPassword())) {
+                return d;
+            }
+        }
+        return null;
     }
     
     /**

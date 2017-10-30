@@ -30,4 +30,7 @@ public interface DiverRepository extends JpaRepository<Diver, Long>{
    
    // Notið sama nafn og dálkanafn í töflunni/tilviksbreytan (e. attribute) 
    List<Diver> findByNameAndPassword(String name, String password);
+   
+   // finnur alla divers með ákveðið nafn name
+   List<Diver> findByName(String name);
 }

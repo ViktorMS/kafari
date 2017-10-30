@@ -8,16 +8,17 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-// Athugið vel að þessi import séu rétt 
+// AthugiÃ° vel aÃ° Ã¾essi import sÃ©u rÃ©tt 
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 /**
  *
- * @author Ebba Þóra Hvannberg
+ * @author Viktor
  * @date október 2017 
  * HBV501G Hugbúnaðarverkefni 1 Háskóli Íslands
  * 
@@ -34,14 +35,14 @@ public class ApplicationTest {
         private MockMvc mockMvc;
          
         /**
-         * Aðferð til að athuga hvort virkar að senda HttpRequest á /nyrKennari
-         * og fá til baka nyrKennari.html síðuna sem inniheldur strenginn Karl
-     * @throws java.lang.Exception
+         * Aðferð til að athuga hvort virkar að senda HttpRequest á /addDiver
+         * og fá til baka addDiver.html síðuna
          */
 	@Test 
-        public void addDiverSkilar() throws Exception {
+        public void addDiverSkilarAddDiver() throws Exception {
         this.mockMvc.perform(get("/addDiver"))                
-                .andDo(print()).andExpect(status().isOk());
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(view().name("addDiver"));
     }
 
 }

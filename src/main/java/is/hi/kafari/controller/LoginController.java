@@ -116,14 +116,15 @@ public class LoginController {
             ModelMap model
         )    
     {
-        Diver d = kafariService.getCurrentDiver();
-        if (d == null) {
+        
+        if (!kafariService.isCurrentDiverSet()) {
                 // skilar login síðu ef kafari ekki í kerfinu
                 currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>Hello there!</strong> Please log in with your username and password. </div>");
                 model.addAttribute("message", currentMessage);
             
                 return "login";
         }
+        Diver d = kafariService.getCurrentDiver();
         currentMessage.setMessage("");
         model.addAttribute("message", currentMessage);
         

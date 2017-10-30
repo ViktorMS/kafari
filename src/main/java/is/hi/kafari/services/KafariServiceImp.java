@@ -33,6 +33,11 @@ public class KafariServiceImp implements KafariService{
     public void setCurrentDiver(Diver diver) {
         this.currentDiver = diver;
     }
+    
+    @Override
+    public boolean isCurrentDiverSet() {
+        return currentDiver != null;
+    }
  
     @Override
     public void addDiver(Diver d) {

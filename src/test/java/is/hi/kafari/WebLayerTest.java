@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringRunner;
 
-// Athugið vel að þessi import séu rétt 
+// AthugiÃ° vel aÃ° Ã¾essi import sÃ©u rÃ©tt 
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -19,13 +19,14 @@ import static org.hamcrest.Matchers.containsString;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 /**
  *
- * @author Ebba Þóra Hvannberg
+ * @author Viktor
  * @date október 2017 
  * HBV501G Hugbúnaðarverkefni 1 Háskóli Íslands
  * 
- * Prófunarklasi sem framkvæmir prófanir á weblayer og notar WebMvcTest 
+ * Prófunarklasi sem framkvæmir prófanir á weblayer og notar WebMvcTest
 */
 @RunWith(SpringRunner.class)
 // Sleppum hér @SpringBootTest
@@ -46,14 +47,16 @@ public class WebLayerTest {
         
         @MockBean
         DiverController diverController;
+        
         /**
-         * Aðferð til að athuga hvort virkar að senda HttpRequest á listiKennari
-         * og fá til baka listiKennara.html síðuna 
+         * Aðferð til að athuga hvort virkar að senda HttpRequest á showAllDives
+         * og fá til baka showAllDives.html síðuna 
          */
 	@Test 
-        public void nyrKennariSkilarKarl() throws Exception {
+        public void showAllDivesSkilarShowAllDives() throws Exception {
         this.mockMvc.perform(get("/showAllDives"))                
-                .andDo(print()).andExpect(status().isOk());
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(view().name("showAllDives"));
     }
 
 }

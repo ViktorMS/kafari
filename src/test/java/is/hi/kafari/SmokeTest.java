@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package is.hi.kafari;
 
 import is.hi.kafari.controller.LoginController;
@@ -15,6 +10,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 /**
  *
  * @author viktor jon helgason
+ * @date október 2017 
+ * HBV501G Hugbúnaðarverkefni 1 Háskóli Íslands
+ * 
+ * Prófunarklasi sem athugar hvort LoginController keyrir 
  */
 
 @RunWith(SpringRunner.class)
@@ -25,7 +24,7 @@ public class SmokeTest {
         LoginController loginController;
 
         /**
-         * Aðferð til að athuga hvort KennariController hlutur hefur verið búinn til 
+         * Aðferð til að athuga hvort LoginController hlutur hafi verið búinn til
          */
         
 	@Test

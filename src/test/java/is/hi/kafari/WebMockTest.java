@@ -1,6 +1,7 @@
 package is.hi.kafari;
 
 
+import is.hi.kafari.controller.DiverController;
 import is.hi.kafari.controller.LoginController;
 import is.hi.kafari.services.KafariService;
 import org.junit.Test;
@@ -23,10 +24,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
  *
- * @author Ebba Þóra Hvannberg
+ * @author Viktor, Einar
  * @date október 2017 
  * HBV501G Hugbúnaðarverkefni 1 Háskóli Íslands
  * 
@@ -37,8 +39,8 @@ import org.springframework.test.web.servlet.ResultActions;
 @RunWith(SpringRunner.class)
 /**
  *  Aðeins veflagið er keyrt upp en ekki allur "context"-inn
- *  Getum beðið um að keyra bara upp KennariController klasann 
- *  Biðjum um að bæta KennariService inn í "context-inn" sem Mock (prófanahlut)
+ *  Getum beðið um að keyra bara upp LoginController klasann 
+ *  Biðjum um að bæta KafariService inn í "context-inn" sem Mock (prófanahlut)
  */
 @WebMvcTest(LoginController.class)     
                                             
@@ -52,8 +54,70 @@ public class WebMockTest {
     // sérstaklega gert fyrir Mockito safnið 
     @MockBean
     KafariService kafariService;
-     
     
-
-       
+    @MockBean
+    DiverController diverController;
+    
+    /**
+     * Aðferð sem prófar /showDiver á LoginController en með
+     * isCurrentDiverSet() true. Ættum að fá til baka showDiver.html síðuna
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void isCurrentDiverSetTrue() throws Exception {
+        // Látum isCurrentDiverSet() skila null 
+        // Notum Mockito í prófanirnar - Mockito er Framework fyrir unit testing í Java 
+        // http://site.mockito.org/   
+        
+        // Prófið ætti að takast - prófum ósönnu leiðina í if-setningunni
+        when(kafariService.isCurrentDiverSet()).thenReturn(true);
+        this.mockMvc.perform(get("/showDiver"))
+                .andDo(print())
+                .andExpect(status()
+                .isOk())
+                .andExpect(view().name("showDiver"));
+      
     }
+
+    /**
+     * Aðferð sem prófar /showDiver á LoginController en með
+     * isCurrentDiverSet() false. Ættum að fá til baka login.html síðuna
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void isCurrentDiverSetFalse() throws Exception {
+        // Látum isCurrentDiverSet() skila null 
+        // Notum Mockito í prófanirnar - Mockito er Framework fyrir unit testing í Java 
+        // http://site.mockito.org/   
+        
+        // Prófið ætti að takast - prófum sönnu leiðina í if-setningunni
+        when(kafariService.isCurrentDiverSet()).thenReturn(false);
+        this.mockMvc.perform(get("/showDiver"))
+                .andDo(print())
+                .andExpect(status()
+                .isOk())
+                .andExpect(view().name("login"));
+      
+    }
+    
+    /**
+     * Prófið ætti að mistakast - prófum ósönnu leiðina isCurrentDiverSet() en berum
+     * saman við rangan streng 
+     * @throws Exception 
+     */
+    @Test
+    public void isCurrentDiverSetFalseWithWrongComparison() throws Exception {
+        // Látum isCurrentDiverSet() skila null 
+        // Notum Mockito í prófanirnar - Mockito er Framework fyrir unit testing í Java 
+        // http://site.mockito.org/   
+        
+        // Prófið ætti að ekki takast - prófum sönnu leiðina í if-setningunni 
+        when(kafariService.isCurrentDiverSet()).thenReturn(false);
+        this.mockMvc.perform(get("/showDiver"))
+                .andDo(print())
+                .andExpect(status()
+                .isOk())
+                .andExpect(view().name("asdf"));
+    }
+
+}

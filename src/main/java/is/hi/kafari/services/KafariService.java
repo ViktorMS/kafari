@@ -61,4 +61,10 @@ public interface KafariService {
      * @param diver nýr diver sem var að skrá sig inn
      */
     public void setCurrentDiver(Diver diver);
+    
+    
+    /**
+     * Skilar true ef currentDiver er ekki null, annars false
+     */
+    public boolean isCurrentDiverSet();
 }

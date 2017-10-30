@@ -7,7 +7,8 @@ import java.util.List;
 /**
  *
  * @author Einar
- *
+ * @date október 2017
+ * 
  * Þjónusta sem sér um samskipti við repositories
  *
  */
@@ -28,6 +29,11 @@ public interface KafariService {
      */
     public List<Diver> allDivers();
     
+    /**
+     * Vistar kafara
+     * @param diver kafari sem skal vista
+     * @return kafarinn sem vistaður var
+     */
     public Diver save(Diver diver);
     
     /**
@@ -41,13 +47,16 @@ public interface KafariService {
     /**
      * Bætir við dive
      *
+     * @param dive dýfan sem bæta skal við
      */
     public void addDive(Dive dive);
     
-     /**
-     * Skilar öllum dives fyrir diver með id id
-     *
-     */   
+    /**
+    * Skilar öllum dives fyrir diver með id id
+    *
+    * @param id id fyrir diver sem skal finna dives fyrir
+    * @return listi af dives sem tilheyra diver með id id
+    */   
     public List<Dive> allDives(long id);
 
     /**
@@ -62,9 +71,9 @@ public interface KafariService {
      */
     public void setCurrentDiver(Diver diver);
     
-    
     /**
      * Skilar true ef currentDiver er ekki null, annars false
+     * @return true eða false eftir því hvort currentDiver er set
      */
     public boolean isCurrentDiverSet();
 }

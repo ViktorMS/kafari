@@ -36,6 +36,11 @@
                     <span class="input-group-addon w-50">Letter</span>
                     <input type="text" class="form-control" value="${letter}" disabled="disabled">
                 </div>
+                <br>
+                 <div class="input-group input-group">
+                    <span class="input-group-addon w-50">OTU</span>
+                    <input type="text" class="form-control" value="${otu}" disabled="disabled">
+                </div>
 
                 <br>
                 

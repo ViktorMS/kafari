@@ -38,13 +38,22 @@ public class Dive {
     private int maxDepth;
     private String decompression;
     private String letter;
+    private int otu;
+
+    public int getOtu() {
+        return otu;
+    }
+
+    public void setOtu(int otu) {
+        this.otu = otu;
+    }
 
     // smiður fyrir tóman hlut
     public Dive() {
     }
   
     // smiður
-    public Dive(Diver diver, Timestamp diveDate, String divingLocation, int totalTime, int maxDepth, String decompression, String letter) {
+    public Dive(Diver diver, Timestamp diveDate, String divingLocation, int totalTime, int maxDepth, String decompression, String letter, int otu) {
         this.diver = diver;
         this.diveDate = diveDate;
         this.divingLocation = divingLocation;
@@ -52,11 +61,12 @@ public class Dive {
         this.maxDepth = maxDepth;
         this.decompression = decompression;
         this.letter = letter;
+        this.otu = otu;
     }
     
     @Override
     public String toString() {
-        return diveDate + divingLocation + totalTime + maxDepth + decompression + letter;
+        return diveDate + divingLocation + totalTime + maxDepth + decompression + letter + otu+"OTU";
     }
 
     public Long getId() {

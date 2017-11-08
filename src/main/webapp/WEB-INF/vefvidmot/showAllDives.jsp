@@ -28,6 +28,7 @@
                         <th>Max depth</th>
                         <th>Decompression</th>
                         <th>Letter</th>
+                        <th>OTU</th>
                     </tr>
                 </thead>
                 <c:forEach var ="dive" items="${dives}">
@@ -38,6 +39,7 @@
                         <td>${dive.maxDepth}</td>
                         <td>${dive.decompression}</td>
                         <td>${dive.letter}</td>
+                        <td>${dive.otu}</td>
                     </tr>
                 </c:forEach>
             </table>

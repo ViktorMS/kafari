@@ -112,6 +112,19 @@ public class DiverController {
         int timeInt = diveForm.getTotalTime();
         int depthInt = diveForm.getMaxDepth();
         String letter = TableLookupController.getLetter(depthInt, timeInt);
+        String otu = TableLookupController.getOTU(depthInt, timeInt);
+        int otuInt = Integer.parseInt(otu);
+        
+        //ATH: Virkar ekki
+        if (otuInt>TableLookupController.getOTUReducedLungCapacity() ){
+            loginController.currentMessage.setMessage("<div class=\"alert alert-danger\" role=\"alert\">Highly dangerous dive; there is a high risk of lung damage.</div>");
+        }else if(otuInt>TableLookupController.getOTUDailyMax()){
+            loginController.currentMessage.setMessage("<div class=\"alert alert-danger\" role=\"alert\">OTU units are over maximum daily intake.</div>");
+        }else if(otuInt>TableLookupController.getOTUDailyLimit()){
+            loginController.currentMessage.setMessage("<div class=\"alert alert-warning\" role=\"alert\">OTU units are over recommended daily intake.</div>");
+        }
+        
+        
         String decompression = TableLookupController.getDecompressionString(depthInt, timeInt);
         if(decompression==null){
             loginController.currentMessage.setMessage("<div class=\"alert alert-danger\" role=\"alert\"> Dive outside of tables. </div>");
@@ -120,9 +133,11 @@ public class DiverController {
         }
         
         Diver d = kafariService.getCurrentDiver();
-        Dive dive = new Dive(d, ts, location, timeInt, depthInt, decompression, letter);
+        Dive dive = new Dive(d, ts, location, timeInt, depthInt, decompression, letter, otuInt);
+        
         kafariService.addDive(dive);
         model.addAttribute("letter", letter);
+        model.addAttribute("otu", otu);
         model.addAttribute("decompression", decompression);
         model.addAttribute("depth", depthInt);
         model.addAttribute("time", timeInt);

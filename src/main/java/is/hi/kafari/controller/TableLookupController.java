@@ -1,5 +1,6 @@
 package is.hi.kafari.controller;
 
+import is.hi.kafari.services.OTUService;
 import static is.hi.kafari.services.TableLookupSevice.lookup;
 import java.util.ArrayList;
 
@@ -21,6 +22,22 @@ public class TableLookupController {
         if (tableRow == null) return null;
         String letter = tableRow.get(0); // read letter from list
         return letter;
+    }
+    
+    public static String getOTU(int depth,int diveTime){
+        return OTUService.getOTU(depth, diveTime);
+    }
+    
+    public static int getOTUDailyLimit(){
+        return OTUService.getDailyLimit();
+    }
+    
+    public static int getOTUReducedLungCapacity(){
+        return OTUService.getReducedLungCapacity();
+    }
+    
+    public static int getOTUDailyMax(){
+        return OTUService.getDailyMax();
     }
     
     /**

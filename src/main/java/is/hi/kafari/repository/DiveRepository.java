@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  *
  * @author Einar
+ * @date November 2017
+ * 
+ * Repository fyrir dýfur
  */
 
 public interface DiveRepository extends JpaRepository<Dive, Long>{

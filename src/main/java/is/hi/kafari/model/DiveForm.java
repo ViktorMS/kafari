@@ -6,6 +6,7 @@ import javax.validation.constraints.*;
 /**
  *
  * @author Einar
+ * @date November 2017
  * 
  * Klasi sem geymir parametra úr dive formi
  * til að hægt sé að validata þá

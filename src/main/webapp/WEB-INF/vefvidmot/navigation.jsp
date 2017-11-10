@@ -1,4 +1,7 @@
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<!-- Author: Team 4 -->
+<!-- Date: November 2017 -->
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a href="/" class="navbar-brand" >Kafari</a>
         <a href="/">
           <button class="btn btn-secondary my-2 my-sm-0 mr-2" type="submit">Home</button>

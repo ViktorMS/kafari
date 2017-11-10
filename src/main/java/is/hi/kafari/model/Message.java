@@ -6,8 +6,10 @@
 package is.hi.kafari.model;
 
 /**
- *  Birtir skilaboð efst á síðu, ef það þarf að koma upplýsingum til notanda
  * @author viktor vjh2@hi.is
+ * @date November 2017
+ * 
+ *  Birtir skilaboð efst á síðu, ef það þarf að koma upplýsingum til notanda
  */
 public class Message {
     private String message;

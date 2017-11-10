@@ -6,8 +6,6 @@
 package is.hi.kafari.services;
 
 import is.hi.kafari.model.Dive;
-import is.hi.kafari.model.Diver;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**

@@ -9,12 +9,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.*;
+
 
 
 /**
  *
  * @author Einar
+ * @date November 2017
  * 
  * Inniheldur upplýsingar um dýfu
  * 
@@ -31,8 +32,7 @@ public class Dive {
     @JoinColumn(name="diverId")
     private Diver diver;
     
-    //private Long diverId;
-    private Timestamp diveDate; //  new java.sql.Timestamp( utilDate.getTime() )
+    private Timestamp diveDate;
     private String divingLocation;
     private int totalTime;
     private int maxDepth;

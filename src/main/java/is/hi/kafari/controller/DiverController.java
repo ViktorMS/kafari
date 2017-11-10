@@ -16,12 +16,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
  * @author Einar
- * date: september 2017
+ * @date september 2017
  *
  * Tekur við skipunum frá vefviðmóti til að skrá nýjar dýfur, 
  * sýna upplýsingar um allar dýfur og sýna alla notendur
@@ -30,12 +29,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("") // Notice here that the Request Mapping is set at the Class level
 public class DiverController {
 
+    // geymir "external" strengi
     private static final ResourceBundle bundle_en_US = ResourceBundle.getBundle("Bundle_en_US");
 
     // Tenging yfir í þjónustu klasa fyrir forritið 
     @Autowired
     KafariService kafariService;
     
+    // Tenging yfir í innskráningarstjórnanda
     @Autowired
     LoginController loginController;
     
@@ -161,6 +162,4 @@ public class DiverController {
         model.addAttribute("divers", list);
         return "allDivers";
     }
-    
-
 }

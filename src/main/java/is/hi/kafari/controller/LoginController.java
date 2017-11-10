@@ -18,30 +18,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  *
  * @author Einar
- * date: september 2017
+ * @date september 2017
  *
- * Tekur við skipunum frá vefviðmóti til að skrá kafa inn og út
+ * Tekur við skipunum frá vefviðmóti til að skrá kafara inn og út
  * og bæta við nýjum köfurum
  */
 @Controller
 @RequestMapping("") // Notice here that the Request Mapping is set at the Class level
 public class LoginController {
 
+    // geymir "external" strengi
     private static final ResourceBundle bundle_en_US = ResourceBundle.getBundle("Bundle_en_US");
 
     // Tenging yfir í þjónustu klasa fyrir forritið 
     @Autowired
     KafariService kafariService;
     
+    // Tenging yfir í dýfutjórnanda
     @Autowired
     DiverController diverController;
     
+    // Skilaboð sem eru sett sem model attribute til að
+    // koma skilaboðum til notanda
     Message currentMessage = new Message();
     
     
     /**
      * Birtir login síðu
      *
+     * @param model síðumodel
      * @return login síða
      */
     @RequestMapping("")
@@ -134,9 +139,17 @@ public class LoginController {
         model.addAttribute("diver", d);
         return "showDiver";
     }
-        
-        
-        
+
+    /**
+     * Ef notendanafn er í kerfinu og lykilorð passar við það þá 
+     * fær notandi yfirlitssíðu, annars fer hann aftur á login síðu
+     * með villuskilaboðum.
+     * 
+     * @param name notendanafn
+     * @param password lykilorð
+     * @param model síðumódel
+     * @return yfirlitssíðu fyrir kafara ef hann er gildur, annars login síðu
+     */    
     @RequestMapping(value = "/", method = {RequestMethod.POST})
     public String showDiverLogin
         (
@@ -166,6 +179,8 @@ public class LoginController {
         model.addAttribute("diver", d);
         return "showDiver";
     }    
+        
+        
     /**
      * Skráir út notanda og sendir aftur á login síðu
      *

@@ -3,6 +3,9 @@ package is.hi.kafari.services;
 /**
  *
  * @author Símon Örn Reynisson <sor7@hi.is>
+ * @date November 2017
+ * 
+ * Flettir upp í JSON skrá upplýsingum um köfun.
  */
 
 import java.io.BufferedReader;

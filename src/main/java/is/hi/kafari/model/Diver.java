@@ -16,6 +16,7 @@ import javax.validation.constraints.*;
 /**
  *
  * @author Einar
+ * @date November 2017
  * 
  * Diver klasi inniheldur nafn og lykilorð kafara
  */

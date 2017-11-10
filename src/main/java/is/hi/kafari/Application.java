@@ -6,9 +6,13 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 /**
- * The main class of the project.
- * By running the main class of {@link Application} then you start the Spring Boot system
- */
+ *
+ * @author Team 4
+ * @date september 2017
+ *
+ * Main fall sem keyrir upp Spring forritið.
+  */
+
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer{
 

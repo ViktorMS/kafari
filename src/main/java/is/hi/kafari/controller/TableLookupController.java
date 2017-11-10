@@ -6,7 +6,11 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Einar
+ * @author Team 4
+ * @date November 2017
+ * 
+ * Tekur við grunnupplýsingum um dýfu og reiknar út
+ * önnur gildi tengd dýfunni.
  */
 public class TableLookupController {
     
@@ -24,18 +28,37 @@ public class TableLookupController {
         return letter;
     }
     
+    /**
+     * Nær í súrefnisnotkun m.v. viðföng
+     * @param depth dýpt dýfu
+     * @param diveTime tími dýfur
+     * @return súrefnisnotkunin í dýfunni
+     */
     public static String getOTU(int depth,int diveTime){
         return OTUService.getOTU(depth, diveTime);
     }
     
+    /**
+     * Nær í ráðlágða súrefnisnotkun yfir sólarhring
+     * @return ráðlögð súrefnisnotkun
+     */
     public static int getOTUDailyLimit(){
         return OTUService.getDailyLimit();
     }
     
+    /**
+     * Segir til um hvenær súrefnisinntaka fer að hafa varanleg áhrif
+     * á heilsu.
+     * @return viðmið
+     */
     public static int getOTUReducedLungCapacity(){
         return OTUService.getReducedLungCapacity();
     }
     
+    /**
+     * Nær í hámarkssúrefnisnotkun yfir sólarhring
+     * @return hámark
+     */    
     public static int getOTUDailyMax(){
         return OTUService.getDailyMax();
     }

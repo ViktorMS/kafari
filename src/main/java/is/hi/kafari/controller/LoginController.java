@@ -3,6 +3,7 @@ package is.hi.kafari.controller;
 import is.hi.kafari.model.Diver;
 import is.hi.kafari.model.Message;
 import is.hi.kafari.services.KafariService;
+import java.util.ResourceBundle;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("") // Notice here that the Request Mapping is set at the Class level
 public class LoginController {
+
+    private static final ResourceBundle bundle_en_US = ResourceBundle.getBundle("Bundle_en_US");
 
     // Tenging yfir í þjónustu klasa fyrir forritið 
     @Autowired
@@ -53,7 +56,7 @@ public class LoginController {
             return "showDiver";
         }
         // else, show the login menu
-        currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>Hello there!</strong> Please log in with your username and password. </div>");
+        currentMessage.setMessage(bundle_en_US.getString("LOGIN_ERROR"));
         model.addAttribute("message", currentMessage);
         return "login";
     }
@@ -83,14 +86,14 @@ public class LoginController {
             BindingResult villur,
             ModelMap model) {
         if (villur.hasErrors()) {
-            currentMessage.setMessage("<div class=\"alert alert-success\" role=\"alert\">"+villur.getFieldError().getDefaultMessage() +"</div>");
+            currentMessage.setMessage(bundle_en_US.getString("ALERT")+villur.getFieldError().getDefaultMessage() +bundle_en_US.getString("DIV"));
             model.addAttribute("message", currentMessage);
             return "addDiver";
         }
         model.addAttribute("diver", diver);
         kafariService.addDiver(diver);
         kafariService.setCurrentDiver(diver);
-        String diverAddedMessage = "<div class=\"alert alert-success\" role=\"alert\"> "+diver.getName()+" has been added to database </div>";
+        String diverAddedMessage = bundle_en_US.getString("ALERT")+diver.getName()+bundle_en_US.getString("USER_ADDED");
         
         currentMessage.setMessage(diverAddedMessage);
         model.addAttribute("message", currentMessage);
@@ -119,7 +122,7 @@ public class LoginController {
         
         if (!kafariService.isCurrentDiverSet()) {
                 // skilar login síðu ef kafari ekki í kerfinu
-                currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>Hello there!</strong> Please log in with your username and password. </div>");
+                currentMessage.setMessage(bundle_en_US.getString("LOGIN_ERROR"));
                 model.addAttribute("message", currentMessage);
             
                 return "login";
@@ -150,7 +153,7 @@ public class LoginController {
             d = kafariService.findDiver(name, password);
             if (d == null) {
                 // skilar login síðu ef kafari ekki í kerfinu
-                currentMessage.setMessage("<div class=\"alert alert-warning\" role=\"alert\"> <strong>Whoops!</strong> Username or password incorrect. </div>");
+                currentMessage.setMessage(bundle_en_US.getString("INCORRECT_LOGIN"));
                 model.addAttribute("message", currentMessage);
             
                 return "login";
@@ -172,7 +175,7 @@ public class LoginController {
     @RequestMapping(value = "/logOut", method = RequestMethod.GET)
     public String logOut(Model model) {
         kafariService.setCurrentDiver(null);
-        currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>All done!</strong> You have been logged out. </div>");
+        currentMessage.setMessage(bundle_en_US.getString("LOGGED_OUT"));
         model.addAttribute("message", currentMessage);
         return "login";
     }

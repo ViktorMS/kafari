@@ -6,6 +6,7 @@ import is.hi.kafari.model.Diver;
 import is.hi.kafari.services.KafariService;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("") // Notice here that the Request Mapping is set at the Class level
 public class DiverController {
 
+    private static final ResourceBundle bundle_en_US = ResourceBundle.getBundle("Bundle_en_US");
+
     // Tenging yfir í þjónustu klasa fyrir forritið 
     @Autowired
     KafariService kafariService;
@@ -49,7 +52,7 @@ public class DiverController {
         Diver d = kafariService.getCurrentDiver();
         if (d == null) {
             // sendir notanda aftur á login síðu ef ekki innskráður
-            loginController.currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>Access restricted!</strong> Please log in with your username and password. </div>");
+            loginController.currentMessage.setMessage(bundle_en_US.getString("ACCESS_RESTRICED"));
             model.addAttribute("message", loginController.currentMessage);
             return "login";
         }
@@ -68,7 +71,7 @@ public class DiverController {
         Diver d = kafariService.getCurrentDiver();
         if (d == null) {
             // sendir notanda aftur á login síðu ef ekki innskráður
-            loginController.currentMessage.setMessage("<div class=\"alert alert-info\" role=\"alert\"> <strong>Access restricted!</strong> Please log in with your username and password. </div>");
+            loginController.currentMessage.setMessage(bundle_en_US.getString("ACCESS_RESTRICED"));
             model.addAttribute("message", loginController.currentMessage);
             return "login";
         }
@@ -102,7 +105,7 @@ public class DiverController {
             BindingResult villur,
             ModelMap model) {
         if (villur.hasErrors()) {
-            loginController.currentMessage.setMessage("<div class=\"alert alert-danger\" role=\"alert\">"+villur.getFieldError().getDefaultMessage() +"</div>");
+            loginController.currentMessage.setMessage(bundle_en_US.getString("ERROR")+villur.getFieldError().getDefaultMessage() +bundle_en_US.getString("DIV"));
             model.addAttribute("message", loginController.currentMessage);
             return "diveForm";
         }
@@ -117,17 +120,17 @@ public class DiverController {
         
         //ATH: Virkar ekki
         if (otuInt>TableLookupController.getOTUReducedLungCapacity() ){
-            loginController.currentMessage.setMessage("<div class=\"alert alert-danger\" role=\"alert\">Highly dangerous dive; there is a high risk of lung damage.</div>");
+            loginController.currentMessage.setMessage(bundle_en_US.getString("DANGEROUS_DIVE_WARNING"));
         }else if(otuInt>TableLookupController.getOTUDailyMax()){
-            loginController.currentMessage.setMessage("<div class=\"alert alert-danger\" role=\"alert\">OTU units are over maximum daily intake.</div>");
+            loginController.currentMessage.setMessage(bundle_en_US.getString("OTU_WARNING"));
         }else if(otuInt>TableLookupController.getOTUDailyLimit()){
-            loginController.currentMessage.setMessage("<div class=\"alert alert-warning\" role=\"alert\">OTU units are over recommended daily intake.</div>");
+            loginController.currentMessage.setMessage(bundle_en_US.getString("OTU_RECOMMENDATION"));
         }
         
         
         String decompression = TableLookupController.getDecompressionString(depthInt, timeInt);
         if(decompression==null){
-            loginController.currentMessage.setMessage("<div class=\"alert alert-danger\" role=\"alert\"> Dive outside of tables. </div>");
+            loginController.currentMessage.setMessage(bundle_en_US.getString("ILLEGAL_DIVE"));
             model.addAttribute("message", loginController.currentMessage);
             return "diveForm";
         }

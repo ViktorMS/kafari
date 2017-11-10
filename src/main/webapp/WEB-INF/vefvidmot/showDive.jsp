@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/daginn.css"/>"/>
     </head>
     <body>
-<%@ include file="navigation.jsp" %>
+        <%@ include file="navigation.jsp" %>
         <div class="container" style="max-width: 600px;">
             <div class="jumbotron">
                 <div class="input-group input-group">
@@ -40,13 +40,13 @@
                     <input type="text" class="form-control" value="${letter}" disabled="disabled">
                 </div>
                 <br>
-                 <div class="input-group input-group">
+                <div class="input-group input-group">
                     <span class="input-group-addon w-50">OTU</span>
                     <input type="text" class="form-control" value="${otu}" disabled="disabled">
                 </div>
 
                 <br>
-                
+
                 <%@ include file="navigationBackBtn.jsp" %>
 
             </div>

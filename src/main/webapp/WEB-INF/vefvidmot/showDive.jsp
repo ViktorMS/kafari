@@ -17,7 +17,7 @@
     </head>
     <body>
         <%@ include file="navigation.jsp" %>
-        <div class="container" style="max-width: 600px;">
+        <div class="container" style="max-width: 1000px;">
             <div class="jumbotron">
                 <div class="input-group input-group">
                     <span class="input-group-addon w-50">Location</span>

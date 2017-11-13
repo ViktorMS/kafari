@@ -76,7 +76,7 @@ public class OTUService {
         
         double pO2 = (depth /10.0)+1* oxygenPercentage;
         double kp = Math.pow((pO2-0.5)/0.5,(1/1.2));
-        System.out.println("pO2 = " + pO2 +  "kp ="  + kp);
+        //System.out.println("pO2 = " + pO2 +  "kp ="  + kp);
         
         return diveTime*kp;
         

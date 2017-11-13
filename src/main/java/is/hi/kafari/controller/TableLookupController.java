@@ -72,7 +72,7 @@ public class TableLookupController {
     public static String getDecompressionString(int depth, int time) {
         ArrayList<String> tableRow = lookup(depth, time, null);
         if (tableRow == null) return null;
-        String[] depths = new String[]{"", "3m", "6m", "12m", "15m"};
+        String[] depths = new String[]{"", "3m", "6m", "9m", "12m", "15m"};
         String decompression = "";
         for(int i = 1; i < tableRow.size(); i++) {
             // build up decompression string with depths and time

@@ -120,7 +120,7 @@ public class DiverController {
         String letter = TableLookupController.getLetter(depthInt, timeInt);
         String otu = TableLookupController.getOTU(depthInt, timeInt);
         int otuInt = Integer.parseInt(otu);
-        
+
         //ATH: Virkar ekki
         if (otuInt>TableLookupController.getOTUReducedLungCapacity() ){
             loginController.currentMessage.setMessage(bundle_en_US.getString("DANGEROUS_DIVE_WARNING"));

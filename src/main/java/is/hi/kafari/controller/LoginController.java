@@ -222,6 +222,7 @@ public class LoginController {
     ////////////////////////////////////
     // Föll til að prófa villumeðhöndlun
     ////////////////////////////////////
+    
     // Framkallar gagnagrunnsvillu - sett hér til að hægt sé að prófa hvað gerist þegar
     // villan verður 
     @RequestMapping("/dbVilla")
@@ -235,4 +236,12 @@ public class LoginController {
     String throwAlmenUndantekning() throws Exception {
         throw new Exception("almenn undantekning");
     }
+
+    // Framkallar gagnagrunnsvillu - sett hér til að hægt sé að prófa hvað gerist þegar
+    // villan verður 
+    @RequestMapping("/gagnaVilla")
+    String framkallarDataException() throws Exception {
+        throw new DataException(null);
+    }    
+    
 }

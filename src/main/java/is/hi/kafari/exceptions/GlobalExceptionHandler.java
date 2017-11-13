@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     
     private static final String DEFAULT_ERROR_VIEW = "unknownError";
 
-    @ExceptionHandler(SQLException.class)
+    @ExceptionHandler(value = SQLException.class)
     public String handleSQLException(HttpServletRequest request, Exception ex) {
         LOGGER.info("SQLException error URL=" + request.getRequestURL());
         return "databaseError";
@@ -44,8 +44,8 @@ public class GlobalExceptionHandler {
      * @param ex undantekningin 
      * @return vefsíðu með tilkynningu um undantekningu 
      */
-    @ExceptionHandler(DataException.class)
-    public String handleGagnaException(HttpServletRequest request, Exception ex) {
+    @ExceptionHandler(value = DataException.class)
+    public String handleDataException(HttpServletRequest request, Exception ex) {
         LOGGER.info("DataException exception URL=" + request.getRequestURL());
         return "databaseError";
     }

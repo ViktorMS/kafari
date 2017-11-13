@@ -11,17 +11,17 @@
 
 <html lang="en">
 
-<head>
-    <title>Invalid URL </title>
-</head>
-<body>
+    <head>
+        <title>Invalid URL </title>
+    </head>
+    <body>
 
-<h1>You have entered an invalid URL</h1>
-<div>
-    <h3 c:text="|HTTP ${attrs.status} ${attrs.error}|"></h3>
-    <p c:text="${attrs.message}"></p>
-</div>
+        <h1>You have entered an invalid URL</h1>
+        <div>
+            <h3> <c:out value="|HTTP ${attrs.status} ${attrs.error}|"/> </h3>
+            <p> <c:out value="${attrs.message}"/> </p>
+        </div>
 
-</body>
+    </body>
 
 </html>

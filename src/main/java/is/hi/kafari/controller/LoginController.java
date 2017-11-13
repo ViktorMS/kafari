@@ -1,6 +1,7 @@
 package is.hi.kafari.controller;
 
 import is.hi.byrjun.exceptions.DiverNotFound;
+import is.hi.kafari.exceptions.DataException;
 import is.hi.kafari.model.Diver;
 import is.hi.kafari.model.Message;
 import is.hi.kafari.services.KafariService;
@@ -91,11 +92,12 @@ public class LoginController {
      * @param model síðumodel
      * @return síða með staðfestingu um að kafara hafi verið bætt við gagnagrunn
      * eða addDiver síðu aftur með villuskilaboðum ef parametrar voru ólöglegir
+     * @throws is.hi.kafari.exceptions.DataException
      */
     @RequestMapping(value = "/diverAdded", method = RequestMethod.POST)
     public String diverAdded(@Valid @ModelAttribute("diver") Diver diver,
             BindingResult villur,
-            ModelMap model) {
+            ModelMap model) throws DataException {
         if (villur.hasErrors()) {
             currentMessage.setMessage(bundle_en_US.getString("ALERT") + villur.getFieldError().getDefaultMessage() + bundle_en_US.getString("DIV"));
             model.addAttribute("message", currentMessage);
@@ -151,13 +153,14 @@ public class LoginController {
      * @param model síðumódel
      * @return yfirlitssíðu fyrir kafara ef hann er gildur, annars login síðu
      * @throws is.hi.byrjun.exceptions.DiverNotFound
+     * @throws is.hi.kafari.exceptions.DataException
      */
     @RequestMapping(value = "/", method = {RequestMethod.POST})
     public String showDiverLogin(
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "password", required = false) String password,
             ModelMap model
-    ) throws DiverNotFound {
+    ) throws DiverNotFound, DataException {
         Diver d = kafariService.getCurrentDiver();
         if (d == null) {
 

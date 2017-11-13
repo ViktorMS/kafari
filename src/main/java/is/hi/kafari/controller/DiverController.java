@@ -1,5 +1,6 @@
 package is.hi.kafari.controller;
 
+import is.hi.kafari.exceptions.DataException;
 import is.hi.kafari.model.Dive;
 import is.hi.kafari.model.DiveForm;
 import is.hi.kafari.model.Diver;
@@ -100,11 +101,12 @@ public class DiverController {
      * @param model síðumodel
      * @return síða með nánari upplýsingum um dýfuna eða dýfusíða aftur með
      *         villuskilaboðum ef parametrar eru ólöglegir
+     * @throws is.hi.kafari.exceptions.DataException
      */
     @RequestMapping(value = "/calculateDecompression", method = RequestMethod.POST)
     public String calculateDecompression(@Valid @ModelAttribute("diveForm") DiveForm diveForm, 
             BindingResult villur,
-            ModelMap model) {
+            ModelMap model) throws DataException {
         if (villur.hasErrors()) {
             loginController.currentMessage.setMessage(bundle_en_US.getString("ERROR")+villur.getFieldError().getDefaultMessage() +bundle_en_US.getString("DIV"));
             model.addAttribute("message", loginController.currentMessage);
@@ -154,9 +156,10 @@ public class DiverController {
      *
      * @param model síðumodel
      * @return síða með öllum köfurum í kerfinu
+     * @throws is.hi.kafari.exceptions.DataException
      */    
     @RequestMapping(value = "/allDivers", method = RequestMethod.GET)
-    public String listUsers(Model model) {
+    public String listUsers(Model model) throws DataException {
         ArrayList<Diver> list;
         list = (ArrayList<Diver>) kafariService.allDivers();
         model.addAttribute("divers", list);

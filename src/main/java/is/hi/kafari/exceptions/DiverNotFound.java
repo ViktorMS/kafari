@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Er Exception sem lýsir því að kennari fannst ekki í gagnagrunni 
  * 
- * @author Ebba Þóra Hvannberg 
- * @date 
+ * @author Einar
+ * @date nóvember 2017
  * HBV501G Hugbúnaðarverkefni 1
  * Háskóli Íslands
  */
@@ -19,21 +19,21 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 // eða Global Exception handler meðhöndlar hana ekki 
 // þá verður til venjuleg Http villa og /error síðan meðhöndlar hana 
 
-@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Enginn kennari")  // 404
+@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="No diver found")  // 404
 public class DiverNotFound extends Exception {
 
-    private String nafn;
+    private String name;
     private static final Logger LOGGER = 
             LoggerFactory.getLogger(DiverNotFound.class);
     
-    public String getNafn() {
-        return nafn;
+    public String getName() {
+        return name;
     }
     
-    public DiverNotFound(String nafn) {
-        super(nafn + " fannst ekki");
-        LOGGER.error("Kennari fannst ekki "+nafn);
-        this.nafn = nafn;
+    public DiverNotFound(String name) {
+        super(name + " not found");
+        LOGGER.error("Diver not found "+name);
+        this.name = name;
         
     }
 }

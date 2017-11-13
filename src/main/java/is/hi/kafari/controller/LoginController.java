@@ -3,8 +3,11 @@ package is.hi.kafari.controller;
 import is.hi.kafari.model.Diver;
 import is.hi.kafari.model.Message;
 import is.hi.kafari.services.KafariService;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +45,8 @@ public class LoginController {
     // koma skilaboðum til notanda
     Message currentMessage = new Message();
     
+    // Logger til að geta skrifað út villuboð
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
     
     /**
      * Birtir login síðu
@@ -194,4 +199,22 @@ public class LoginController {
         model.addAttribute("message", currentMessage);
         return "login";
     }
+    
+    ////////////////////////////////////
+    // Föll til að prófa villumeðhöndlun
+    ////////////////////////////////////
+    
+    // Framkallar gagnagrunnsvillu - sett hér til að hægt sé að prófa hvað gerist þegar
+    // villan verður 
+    @RequestMapping("/dbVilla")
+	String framkallarSQLException() throws SQLException {
+		throw new SQLException();
+	}
+     
+    // Framkallar gagnagrunnsvillu - sett hér til að hægt sé að prófa hvað gerist þegar
+    // villan verður 
+    @RequestMapping("/almennVilla")
+	String throwAlmenUndantekning() throws Exception {
+		throw new Exception("almenn undantekning");
+	}
 }

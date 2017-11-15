@@ -25,13 +25,11 @@
                             <thead class="thead-inverse">
                                 <tr>
                                     <th>Name</th>
-                                    <th>Password</th>
                                 </tr>
                             </thead>
                             <c:forEach var ="diver" items="${divers}">
                                 <tr>
                                     <td>${diver.name} </td>
-                                    <td>${diver.password}</td>
                                 </tr>
                             </c:forEach>
                         </table>

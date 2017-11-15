@@ -2,7 +2,9 @@ package is.hi.kafari.controller;
 
 import is.hi.kafari.services.OTUService;
 import static is.hi.kafari.services.TableLookupSevice.lookup;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import org.json.JSONException;
 
 /**
  *
@@ -21,7 +23,7 @@ public class TableLookupController {
      * @param time tími dýfu
      * @return strengur sem inniheldur nýja bókstafinn
      */
-    public static String getLetter(int depth, int time) {
+    public static String getLetter(int depth, int time) throws JSONException, FileNotFoundException {
         ArrayList<String> tableRow = lookup(depth, time, null);
         if (tableRow == null) return null;
         String letter = tableRow.get(0); // read letter from list
@@ -69,7 +71,7 @@ public class TableLookupController {
      * @param time tími dýfu
      * @return strengur sem inniheldur tíma sem þarf að stoppa á vieigandi dýpi
      */
-    public static String getDecompressionString(int depth, int time) {
+    public static String getDecompressionString(int depth, int time) throws JSONException, FileNotFoundException {
         ArrayList<String> tableRow = lookup(depth, time, null);
         if (tableRow == null) return null;
         String[] depths = new String[]{"", "3m", "6m", "9m", "12m", "15m"};

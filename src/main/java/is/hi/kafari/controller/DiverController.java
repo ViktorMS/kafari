@@ -5,10 +5,12 @@ import is.hi.kafari.model.Dive;
 import is.hi.kafari.model.DiveForm;
 import is.hi.kafari.model.Diver;
 import is.hi.kafari.services.KafariService;
+import java.io.FileNotFoundException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javax.validation.Valid;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,7 +108,7 @@ public class DiverController {
     @RequestMapping(value = "/calculateDecompression", method = RequestMethod.POST)
     public String calculateDecompression(@Valid @ModelAttribute("diveForm") DiveForm diveForm, 
             BindingResult villur,
-            ModelMap model) throws DataException {
+            ModelMap model) throws DataException, JSONException, FileNotFoundException {
         if (villur.hasErrors()) {
             loginController.currentMessage.setMessage(bundle_en_US.getString("ERROR")+villur.getFieldError().getDefaultMessage() +bundle_en_US.getString("DIV"));
             model.addAttribute("message", loginController.currentMessage);
@@ -124,10 +126,13 @@ public class DiverController {
         //ATH: Virkar ekki
         if (otuInt>TableLookupController.getOTUReducedLungCapacity() ){
             loginController.currentMessage.setMessage(bundle_en_US.getString("DANGEROUS_DIVE_WARNING"));
+            model.addAttribute("message", loginController.currentMessage);
         }else if(otuInt>TableLookupController.getOTUDailyMax()){
             loginController.currentMessage.setMessage(bundle_en_US.getString("OTU_WARNING"));
+            model.addAttribute("message", loginController.currentMessage);
         }else if(otuInt>TableLookupController.getOTUDailyLimit()){
             loginController.currentMessage.setMessage(bundle_en_US.getString("OTU_RECOMMENDATION"));
+            model.addAttribute("message", loginController.currentMessage);
         }
         
         

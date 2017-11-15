@@ -26,9 +26,9 @@
                 <form method="POST" commandName="diveForm" action="/calculateDecompression">
                     <input name="divingLocation" type="text" placeholder="Location of dive" required class="form-control">
                     <br>
-                    <input name="totalTime" type="text" placeholder="Time in minutes" required class="form-control">
+                    <input name="totalTime" type="number" min="0" max="1440" placeholder="Time in minutes" required class="form-control">
                     <br>
-                    <input name="maxDepth" type="text" placeholder="Max depth in meters" required class="form-control">
+                    <input name="maxDepth" type="number" min="0" max="60"  placeholder="Max depth in meters" required class="form-control">
                     <br>
                     <input type="submit" value="Calculate and log dive" class="btn btn-primary" style="width:100%;"> 
                     <br>

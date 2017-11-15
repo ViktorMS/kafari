@@ -9,6 +9,7 @@ package is.hi.kafari.services;
  */
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import org.json.*;
@@ -22,9 +23,9 @@ public class TableLookupSevice {
      * @return ArrayList af strengjum á eftirfarandi formi: {Bókstafur, Decompression 3m, decompression 6m, 12m, 15m}
      * @throws org.json.JSONException
      */
-    public static ArrayList<String> lookup(int depth, int diveTime, String letter) throws JSONException{
+    public static ArrayList<String> lookup(int depth, int diveTime, String letter) throws JSONException, FileNotFoundException{
         ArrayList<String> results = new ArrayList();
-        String data = readFile("toflur.json");
+        String data = readFile("tasdfoflur.json");
         JSONObject jobj = new JSONObject(data);
         JSONArray tafla = getTable(jobj,depth);
         JSONArray current;
@@ -82,7 +83,7 @@ public class TableLookupSevice {
      * @return int sem bæta á við tíma köfunar. Ef dýpt er út fyrir leyfilegt 
      * bil skilar fallið 0.
      */
-    private static int addTime(int depth, String letter) throws JSONException{
+    private static int addTime(int depth, String letter) throws JSONException, FileNotFoundException{
         
         if(depth>=60)return 0;
         String data = readFile("addtime.json");
@@ -111,7 +112,7 @@ public class TableLookupSevice {
      * @param filename Nafn skráar eða absolute path
      * @return strengur með innihaldi skráarinnar. 
      */
-    private static String readFile(String filename) {
+    private static String readFile(String filename) throws FileNotFoundException {
         String s="";
         
         try{
@@ -125,7 +126,7 @@ public class TableLookupSevice {
             s=sb.toString();
             
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new FileNotFoundException();
         }
         
         return s;

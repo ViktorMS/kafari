@@ -48,7 +48,7 @@ public class TableLookupSevice {
                 break;
             }
         }
-        if (depth <= 9) {
+        if (depth <= 9 && results.isEmpty()) {
             current = tafla.getJSONArray(tafla.length() - 1);
             //Bæta við bókstaf
             results.add(current.getString(2));
